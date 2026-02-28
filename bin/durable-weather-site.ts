@@ -5,7 +5,6 @@ import { App } from 'aws-cdk-lib'
 
 import { DurableWeatherStack } from '../lib/durable-weather-stack'
 
-// Env var validation
 const {
   AWS_DEFAULT_ACCOUNT_ID,
   AWS_DEFAULT_REGION,

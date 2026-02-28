@@ -168,8 +168,7 @@ export class DurableWeatherStack extends Stack {
   }
 
   private addSchedules() {
-    // Durable functions require a qualified ARN (version, alias, or $LATEST)
-    // $LATEST doesn't support Lambda resource-based policies, so use an alias
+    // $LATEST doesn't support resource-based policies, so use an alias
     const alias = this.durableFunction.addAlias('live')
 
     const queueName = `${this.id}-scheduler-dlq`
