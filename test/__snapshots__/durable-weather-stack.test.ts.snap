@@ -795,6 +795,9 @@ exports[`Durable weather stack > Verify stack resources 1`] = `
     },
     "MyTestStackschedulerdlq15BF8F7B": {
       "DeletionPolicy": "Delete",
+      "Properties": {
+        "QueueName": "MyTestStack-scheduler-dlq",
+      },
       "Type": "AWS::SQS::Queue",
       "UpdateReplacePolicy": "Delete",
     },
