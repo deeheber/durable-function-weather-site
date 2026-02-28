@@ -1,0 +1,64 @@
+name: ci
+run-name: ci run by ${{ github.actor }}
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: durable-weather-site-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      CI: true
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v6
+
+      - name: setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: install dependencies
+        run: npm ci
+
+      - name: build
+        run: npm run build
+
+      - name: run prettier format check
+        run: npm run format:ci
+
+      - name: run eslint check
+        run: npm run lint:ci
+
+      - name: test
+        run: npm test
+
+      - name: configure AWS credentials from OIDC
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          # 15 minutes aka shortest time allowed
+          role-duration-seconds: 900
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          aws-region: us-west-2
+
+      - name: cdk synth
+        run: npm run synth:quiet
+        env:
+          LOCATION_NAME: Pittsburgh, Pennsylvania
+          OPEN_WEATHER_URL: https://openweathermap.org/city/5206379
+          SCHEDULES: 'rate(60 minutes)'
+          STACK_PREFIX: pitt-rain-durable
+          WEATHER_LOCATION_LAT: 40.4406
+          WEATHER_LOCATION_LON: -79.9959
+          WEATHER_TYPE: rain
