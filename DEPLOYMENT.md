@@ -50,3 +50,13 @@ npm run destroy
 ```
 
 If this is the only project using the `weather-site-api-key` secret, manually delete it from AWS Secrets Manager.
+
+## 🔄 CI/CD (GitHub Actions)
+
+The CI workflow (`.github/workflows/ci.yml`) uses [GitHub's OIDC integration with AWS](https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services) to authenticate — no long-lived AWS credentials are stored in GitHub.
+
+To set this up:
+
+1. [Configure an OIDC identity provider](https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services) in your AWS account
+2. Create an IAM role that the GitHub Actions runner can assume, scoping the trust policy to your repository
+3. Add the role ARN as a GitHub Actions secret named `AWS_ROLE_TO_ASSUME` in your repository settings (**Settings → Secrets and variables → Actions**)

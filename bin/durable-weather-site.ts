@@ -12,7 +12,7 @@ const {
   CDK_DEFAULT_REGION,
   LOCATION_NAME: locationName = '',
   OPEN_WEATHER_URL: openWeatherUrl = '',
-  SCHEDULES: schedules = 'rate(10 minutes)',
+  SCHEDULES: schedules = 'rate(60 minutes)',
   STACK_PREFIX: stackPrefix = 'myDurableStack',
   WEATHER_LOCATION_LAT: weatherLocationLat = '',
   WEATHER_LOCATION_LON: weatherLocationLon = '',
