@@ -1,0 +1,21 @@
+*.js
+!jest.config.js
+*.d.ts
+node_modules
+dist
+
+# CDK asset staging directory
+.cdk.staging
+cdk.out
+
+# Ignore all files and directories starting with dot
+.*
+# Exceptions
+!/.github/
+!/.github/**
+!.gitignore
+!.env.example
+!.nvmrc
+!.prettierrc
+!.prettierignore
+!.npmignore

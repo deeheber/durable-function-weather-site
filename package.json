@@ -1,0 +1,48 @@
+{
+  "name": "durable-function-weather-site",
+  "version": "0.1.0",
+  "bin": {
+    "durable-weather-site": "bin/durable-weather-site.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "cdk": "cdk",
+    "clean": "rm -rf dist",
+    "deploy": "npm run clean && npm run build && npm run cdk deploy -- --all",
+    "deploy:ci": "npm run clean && npm run build && npm run cdk deploy -- --all --require-approval never",
+    "destroy": "npm run cdk destroy -- --all",
+    "diff": "npm run cdk diff -- --all",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "format:ci": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "lint": "eslint --fix",
+    "lint:ci": "eslint --quiet",
+    "synth": "npm run build && npm run cdk synth",
+    "synth:quiet": "npm run build && npm run cdk synth -- -q",
+    "test": "vitest run",
+    "watch": "tsc -w"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^25.3.2",
+    "aws-cdk": "^2.1108.0",
+    "dotenv": "^17.3.1",
+    "esbuild": "^0.27.3",
+    "eslint": "^10.0.2",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "globals": "^17.3.0",
+    "prettier": "^3.8.1",
+    "tsx": "^4.21.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.56.1",
+    "vitest": "^4.0.18"
+  },
+  "dependencies": {
+    "@aws-sdk/client-cloudfront": "^3.1000.0",
+    "@aws-sdk/client-s3": "^3.1000.0",
+    "@aws-sdk/client-secrets-manager": "^3.1000.0",
+    "@aws-sdk/client-ssm": "^3.1000.0",
+    "@aws/durable-execution-sdk-js": "^1.0.0",
+    "aws-cdk-lib": "^2.240.0",
+    "constructs": "^10.5.1"
+  }
+}
