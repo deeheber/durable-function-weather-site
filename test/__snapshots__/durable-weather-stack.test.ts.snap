@@ -513,7 +513,7 @@ exports[`Durable weather stack > Verify stack resources 1`] = `
         },
         "FunctionVersion": {
           "Fn::GetAtt": [
-            "MyTestStackdurableFunctionCurrentVersion70E024565554abb949a853456ff2e4ab70a8be0c",
+            "MyTestStackdurableFunctionCurrentVersion70E02456[HASH]",
             "Version",
           ],
         },
@@ -521,7 +521,7 @@ exports[`Durable weather stack > Verify stack resources 1`] = `
       },
       "Type": "AWS::Lambda::Alias",
     },
-    "MyTestStackdurableFunctionCurrentVersion70E024565554abb949a853456ff2e4ab70a8be0c": {
+    "MyTestStackdurableFunctionCurrentVersion70E02456[HASH]": {
       "Metadata": {
         "aws:cdk:do-not-refactor": true,
       },
