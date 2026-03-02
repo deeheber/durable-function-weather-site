@@ -115,7 +115,8 @@ export class DurableWeatherStack extends Stack {
     this.durableFunction = new NodejsFunction(this, funcId, {
       functionName: funcId,
       runtime: Runtime.NODEJS_24_X,
-      entry: 'dist/src/functions/weather-workflow.js',
+      entry: 'src/functions/weather-workflow.ts',
+      bundling: { sourceMap: true },
       loggingFormat: LoggingFormat.JSON,
       logGroup,
       tracing: Tracing.ACTIVE,
@@ -129,6 +130,7 @@ export class DurableWeatherStack extends Stack {
       environment: {
         BUCKET_NAME: this.bucket.bucketName,
         LOCATION_NAME: this.props.locationName,
+        NODE_OPTIONS: '--enable-source-maps',
         OPEN_WEATHER_URL: this.props.openWeatherUrl,
         WEATHER_TYPE: this.props.weatherType,
         SSM_PARAM_NAME: siteStatusParam.parameterName,

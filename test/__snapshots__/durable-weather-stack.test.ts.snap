@@ -31,7 +31,7 @@ exports[`Durable weather stack > Verify stack resources 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "3423a042b818e31c1e34a19d6689ab2e5f9b70fcbe9e71df66f241b20a200bd9.zip",
+          "S3Key": "[ASSET_HASH].zip",
         },
         "Environment": {
           "Variables": {
@@ -194,7 +194,7 @@ exports[`Durable weather stack > Verify stack resources 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6.zip",
+          "S3Key": "[ASSET_HASH].zip",
         },
         "Description": {
           "Fn::Join": [
@@ -458,7 +458,7 @@ exports[`Durable weather stack > Verify stack resources 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "be67de48f6f483f6cbc729da78aba3df43a863c0a0192fc3c67e9366b5921bd4.zip",
+          "S3Key": "[ASSET_HASH].zip",
         },
         "DurableConfig": {
           "ExecutionTimeout": 3600,
@@ -473,6 +473,7 @@ exports[`Durable weather stack > Verify stack resources 1`] = `
               "Ref": "MyTestStackdistribution38E1EA5D",
             },
             "LOCATION_NAME": "Test Location",
+            "NODE_OPTIONS": "--enable-source-maps",
             "OPEN_WEATHER_URL": "https://api.openweathermap.org/data/2.5/onecall",
             "SSM_PARAM_NAME": {
               "Ref": "MyTestStackstatusparamD08CEFD4",
@@ -512,7 +513,7 @@ exports[`Durable weather stack > Verify stack resources 1`] = `
         },
         "FunctionVersion": {
           "Fn::GetAtt": [
-            "MyTestStackdurableFunctionCurrentVersion70E02456d8b4bf1545eda8006524a796d5e6f4f5",
+            "MyTestStackdurableFunctionCurrentVersion70E02456[HASH]",
             "Version",
           ],
         },
@@ -520,7 +521,7 @@ exports[`Durable weather stack > Verify stack resources 1`] = `
       },
       "Type": "AWS::Lambda::Alias",
     },
-    "MyTestStackdurableFunctionCurrentVersion70E02456d8b4bf1545eda8006524a796d5e6f4f5": {
+    "MyTestStackdurableFunctionCurrentVersion70E02456[HASH]": {
       "Metadata": {
         "aws:cdk:do-not-refactor": true,
       },
@@ -724,7 +725,7 @@ exports[`Durable weather stack > Verify stack resources 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "0cfdecad2260a3a84ad0c2d08a77e03c9d25e26c7b52f26b1e1faf97aef92f18.zip",
+          "S3Key": "[ASSET_HASH].zip",
         },
         "Description": "/opt/awscli/aws",
       },
@@ -750,7 +751,7 @@ exports[`Durable weather stack > Verify stack resources 1`] = `
           },
         ],
         "SourceObjectKeys": [
-          "5dd6e66aca7809028d3677a67f96628aaa6a67242456ee0f3c81ba4842f6afb0.zip",
+          "[ASSET_HASH].zip",
         ],
         "WaitForDistributionInvalidation": true,
       },
