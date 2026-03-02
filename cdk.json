@@ -1,5 +1,5 @@
 {
-  "app": "npx tsx bin/durable-weather-site.ts",
+  "app": "node --env-file-if-exists=.env --import tsx bin/durable-weather-site.ts",
   "watch": {
     "include": ["**"],
     "exclude": [

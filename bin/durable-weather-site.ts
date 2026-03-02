@@ -1,57 +1,37 @@
 #!/usr/bin/env node
-import 'dotenv/config'
-
 import { App } from 'aws-cdk-lib'
+import { z } from 'zod'
 
 import { DurableWeatherStack } from '../lib/durable-weather-stack'
 
-const {
-  AWS_DEFAULT_ACCOUNT_ID,
-  AWS_DEFAULT_REGION,
-  CDK_DEFAULT_ACCOUNT,
-  CDK_DEFAULT_REGION,
-  LOCATION_NAME: locationName = '',
-  OPEN_WEATHER_URL: openWeatherUrl = '',
-  SCHEDULES: schedules = 'rate(60 minutes)',
-  STACK_PREFIX: stackPrefix = 'myDurableStack',
-  WEATHER_LOCATION_LAT: weatherLocationLat = '',
-  WEATHER_LOCATION_LON: weatherLocationLon = '',
-  WEATHER_TYPE: weatherType = 'snow',
-} = process.env
+const envSchema = z.object({
+  CDK_DEFAULT_ACCOUNT: z.string().optional(),
+  AWS_DEFAULT_ACCOUNT_ID: z.string().optional(),
+  CDK_DEFAULT_REGION: z.string().optional(),
+  AWS_DEFAULT_REGION: z.string().optional(),
+  LOCATION_NAME: z.string().min(1),
+  OPEN_WEATHER_URL: z.url(),
+  SCHEDULES: z.string().default('rate(60 minutes)'),
+  STACK_PREFIX: z.string().default('myDurableStack'),
+  WEATHER_LOCATION_LAT: z.string().min(1),
+  WEATHER_LOCATION_LON: z.string().min(1),
+  WEATHER_TYPE: z.string().default('snow'),
+})
 
-const account = CDK_DEFAULT_ACCOUNT || AWS_DEFAULT_ACCOUNT_ID
-const region = CDK_DEFAULT_REGION || AWS_DEFAULT_REGION
+const env = envSchema.parse(process.env)
 
-if (
-  ![locationName, openWeatherUrl, weatherLocationLat, weatherLocationLon].every(
-    (el) => !!el,
-  )
-) {
-  // eslint-disable-next-line no-console
-  console.log(
-    JSON.stringify(
-      {
-        locationName,
-        openWeatherUrl,
-        weatherLocationLat,
-        weatherLocationLon,
-      },
-      null,
-      2,
-    ),
-  )
-  throw new Error('Missing environment variables!')
-}
+const account = env.CDK_DEFAULT_ACCOUNT || env.AWS_DEFAULT_ACCOUNT_ID
+const region = env.CDK_DEFAULT_REGION || env.AWS_DEFAULT_REGION
 
 const app = new App()
 
-new DurableWeatherStack(app, `${stackPrefix}-weather`, {
-  description: `Resources for ${stackPrefix}-weather, a durable function weather website`,
+new DurableWeatherStack(app, `${env.STACK_PREFIX}-weather`, {
+  description: `Resources for ${env.STACK_PREFIX}-weather, a durable function weather website`,
   env: { account, region },
-  locationName,
-  openWeatherUrl,
-  schedules: schedules.split(', '),
-  weatherLocationLat,
-  weatherLocationLon,
-  weatherType,
+  locationName: env.LOCATION_NAME,
+  openWeatherUrl: env.OPEN_WEATHER_URL,
+  schedules: env.SCHEDULES.split(', '),
+  weatherLocationLat: env.WEATHER_LOCATION_LAT,
+  weatherLocationLon: env.WEATHER_LOCATION_LON,
+  weatherType: env.WEATHER_TYPE,
 })
