@@ -2,6 +2,7 @@ import { App } from 'aws-cdk-lib'
 import { Template } from 'aws-cdk-lib/assertions'
 
 import { DurableWeatherStack } from '../lib/durable-weather-stack'
+import { sanitizeAssetHashes } from './test-utils'
 
 describe('Durable weather stack', () => {
   test('Verify stack resources', () => {
@@ -40,6 +41,6 @@ describe('Durable weather stack', () => {
       ScheduleExpression: 'rate(10 minutes)',
     })
 
-    expect(template.toJSON()).toMatchSnapshot()
+    expect(sanitizeAssetHashes(template.toJSON())).toMatchSnapshot()
   })
 })
