@@ -1,6 +1,6 @@
 # Durable Function Weather Site
 
-A Lambda Durable Function version of the [weather-site](https://github.com/deeheber/weather-site) Step Function project. Built as an example to compare the two approaches.
+A Lambda Durable Function version of the [weather-site](https://github.com/deeheber/weather-site) Step Function project. Built as an example to compare the two approaches. See the [accompanying blog post](https://danielleheberling.xyz/blog/durable-functions/) for a detailed comparison.
 
 ## 🤔 What is this?
 
