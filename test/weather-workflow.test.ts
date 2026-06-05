@@ -72,7 +72,8 @@ const createMockContext = (): MockContext => ({
   parallel: vi.fn(
     async (_name: string, fns: ((ctx: MockContext) => Promise<unknown>)[]) => {
       const ctx = createMockContext()
-      return Promise.all(fns.map((fn) => fn(ctx)))
+      const results = await Promise.all(fns.map((fn) => fn(ctx)))
+      return { getResults: () => results }
     },
   ),
 })
